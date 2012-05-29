@@ -43,16 +43,17 @@ class Singly(object):
         conn.close()
         return data.get('access_token')
 
-
     @classmethod
     def request(cls, access_token, url):
-        consumer = cls.CONSUMER
-        headers = oauth_request.to_header(realm=cls.API_HOST)
-        connection = httplib.HTTPSConnection(cls.API_HOST)
-        connection.request('GET', full_url, headers=headers)
-        resp = connection.getresponse()
-        status = str(resp.status)
-        if str(status) != '200':
-            raise Exception('HTTP {error_code}'.format(error_code=status))
+        params = {
+            'access_token': access_token
+        }
+        full_url = '{0}?{1}'.format(url, urllib.urlencode(params))
+        conn = httplib.HTTPSConnection(cls.API_HOST)
+        conn.request('GET', full_url)
+        resp = conn.getresponse()
+        if resp.status != 200:
+            raise Exception('HTTP {0} {1}'.format(resp.status, resp.reason))
         data = resp.read()
+        conn.close()
         return data

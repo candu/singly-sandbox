@@ -8,11 +8,12 @@ from foo.lib.singly import Singly
 def home(request):
     if request.session.get('access_token') is None:
         return redirect('/login')
+    data = Singly.request(request.session['access_token'], '/profiles')
     page = \
     <div>
         <h1>It works</h1>
         <h2>{__name__}</h2>
-        <h3>{request.session['access_token']}</h3>
+        <h3>{data}</h3>
     </div>
     return HttpResponse(unicode(page))
 
