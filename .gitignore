@@ -1,3 +1,4 @@
 *.swp
 *.pyc
 singly_sandbox/settings.py
+singly_sandbox/foo.sql3
