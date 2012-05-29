@@ -1,0 +1,14 @@
+html, body {
+  font-family: "Oxygen", "Helvetica Neue", sans-serif;
+  font-size: 14pt;
+  color: #222;
+  background-color: #f7f7f7;
+  margin: 0 auto;
+  width: 960px;
+  height: 100%;
+}
+
+#container {
+  min-height: 100%;
+  position: relative;
+}

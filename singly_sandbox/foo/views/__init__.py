@@ -4,17 +4,31 @@ from django.http import HttpResponse
 from django.shortcuts import redirect
 
 from foo.lib.singly import Singly
+from foo.ui.services import :ui:services
+from foo.ui.page import :ui:page
 
 def home(request):
     if request.session.get('access_token') is None:
         return redirect('/login')
-    data = Singly.request(request.session['access_token'], '/profiles')
+    #data = Singly.request(request.session['access_token'], '/profiles')
+    services = [
+        'email',
+        'facebook',
+        'fitbit',
+        'foursquare',
+        'gcontacts',
+        'github',
+        'instagram',
+        'linkedin',
+        'tumblr',
+        'twitter',
+    ]
     page = \
-    <div>
-        <h1>It works</h1>
-        <h2>{__name__}</h2>
-        <h3>{data}</h3>
-    </div>
+    <ui:page>
+        <h1>Singly Sandbox</h1>
+        <h2>Authenticate with the following services:</h2>
+        <ui:services services={services} />
+    </ui:page>
     return HttpResponse(unicode(page))
 
 def login(request):
